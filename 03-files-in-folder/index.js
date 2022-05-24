@@ -1,6 +1,6 @@
-const path = require("path");
-const fs = require("fs");
-const dir = path.join(__dirname, "secret-folder");
+const path = require('path');
+const fs = require('fs');
+const dir = path.join(__dirname, 'secret-folder');
 
 fs.readdir(dir, { withFileTypes: true }, (err, items) => {
   if (err) throw err;
@@ -15,13 +15,13 @@ function fileInfo(file) {
   fs.stat(path.join(dir, file), (err, stat) => {
     if (err) throw err;
     console.log(
-      "Имя: " +
+      'Имя: ' +
         file.substring(0, a - b) +
-        "   Расширение: " +
+        '   Расширение: ' +
         path.extname(file).substring(1) +
-        "   Размер: " +
+        '   Размер: ' +
         stat.size / 1000 +
-        " KB"
+        ' KB'
     );
   });
 }

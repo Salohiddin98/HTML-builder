@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const dir = path.join(__dirname, "files");
-const dest = path.join(__dirname, "files-copy");
+const fs = require('fs');
+const path = require('path');
+const dir = path.join(__dirname, 'files');
+const dest = path.join(__dirname, 'files-copy');
 
 fs.readdir(dest, { withFileTypes: true }, (err, items) => {
   if (err) throw err;
@@ -23,12 +23,10 @@ function copyDir() {
     items.forEach((file) => {
       if (file.isFile()) {
         fs.copyFile(`${dir}/${file.name}`, `${dest}/${file.name}`, (err) => {
-          if (err) {
-            throw err;
-          }
+          if (err) throw err;
         });
       } else {
-        console.log(file.name + "-папка и не будет скопирован!");
+        console.log(file.name + '-папка и не будет скопирован!');
       }
     });
   });
