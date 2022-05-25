@@ -5,14 +5,14 @@ const dest = path.join(__dirname, 'files-copy');
 
 fs.mkdir(dest, { recursive: true }, (err) => {
   if (err) throw err;
-  copyDir();
-});
-fs.readdir(dest, { withFileTypes: true }, (err, items) => {
-  if (err) throw err;
-  items.forEach((file) => {
-    if (file.isFile()) {
-      fs.unlink(`${dest}/${file.name}`, (err) => err);
-    }
+  fs.readdir(dest, { withFileTypes: true }, (err, items) => {
+    if (err) throw err;
+    items.forEach((file) => {
+      if (file.isFile()) {
+        fs.unlink(`${dest}/${file.name}`, (err) => err);
+      }
+    });
+    copyDir();
   });
 });
 
