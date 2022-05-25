@@ -75,7 +75,6 @@ function copyFiles(dir, dest) {
   function copyDir() {
     fs.readdir(dir, { withFileTypes: true }, (err, items) => {
       if (err) throw err;
-      console.log(items);
       items.forEach((file) => {
         if (file.isFile()) {
           fs.copyFile(`${dir}/${file.name}`, `${dest}/${file.name}`, (err) => {
