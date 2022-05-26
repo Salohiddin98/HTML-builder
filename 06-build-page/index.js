@@ -27,13 +27,13 @@ function replaceTag(str) {
           );
           temp.on('data', (data) => {
             str = str.replace(`{{${items[i].name.split('.')[0]}}}`, data);
-            i++;
-            if (i === items.length)
+            if (i + 1 === items.length) {
               fs.writeFile(
                 '06-build-page/project-dist/index.html',
                 str,
                 (err) => err
               );
+            }
           });
         }
       }
