@@ -20,24 +20,27 @@ function replaceTag(str) {
     { withFileTypes: true },
     (err, items) => {
       if (err) throw err;
-      items.forEach((file) => {
-        if (file.isFile() && path.extname(file.name) === '.html') {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].isFile() && path.extname(items[i].name) === '.html') {
           let temp = fs.createReadStream(
-            `06-build-page/components/${file.name}`
+            `06-build-page/components/${items[i].name}`
           );
           temp.on('data', (data) => {
-            str = str.replace(`{{${file.name.split('.')[0]}}}`, data);
-            fs.writeFile(
-              '06-build-page/project-dist/index.html',
-              str,
-              (err) => err
-            );
+            str = str.replace(`{{${items[i].name.split('.')[0]}}}`, data);
+            i++;
+            if (i === items.length)
+              fs.writeFile(
+                '06-build-page/project-dist/index.html',
+                str,
+                (err) => err
+              );
           });
         }
-      });
+      }
     }
   );
 }
+
 function cssBundle() {
   const style = fs.createWriteStream('06-build-page/project-dist/style.css');
   fs.readdir('06-build-page/styles', { withFileTypes: true }, (err, items) => {
